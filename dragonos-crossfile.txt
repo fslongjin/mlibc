@@ -1,8 +1,8 @@
 [binaries]
-c = 'gcc'
-cpp = 'g++'
-strip = 'x86_64-dragonos-strip'
-ld = 'x86_64-dragonos-ld'
+c = 'x86_64-elf-gcc'
+cpp = 'x86_64-elf-g++'
+strip = 'x86_64-elf-strip'
+ld = 'x86_64-elf-ld'
 pkgconfig = 'pkg-config'
 
 [properties]
@@ -13,7 +13,7 @@ skip_sanity_check = true
 [cmake]
 
 [host_machine]
-system = 'lemon'
+system = 'dragonos'
 cpu_family = 'x86_64'
 cpu = 'x86_64'
 endian = 'little'

@@ -9,7 +9,7 @@
 #include <sys/resource.h>
 
 //#include <mlibc/allocator.hpp>
-
+namespace mlibc{
 /*int sys_vm_map(void *hint, size_t size, int prot, int flags, int fd, off_t offset, void **window) {
 	__ensure(flags & MAP_ANONYMOUS);
 
@@ -31,9 +31,10 @@ void sys_libc_panic(){
 }
 
 void sys_libc_log(const char* msg){
-	syscall(0, (uintptr_t)msg);
+	syscall(SYS_PUT_STRING, (uintptr_t)msg, 0x00ffffff, 0);
 }
 
+#ifndef MLIBC_BUILDING_RTDL
 void sys_exit(int status){
 	syscall(SYS_EXIT, status);
 
@@ -58,8 +59,7 @@ int sys_clock_get(int clock, time_t *secs, long *nanos) {
 }
 
 int sys_chdir(const char *path){
-	syscall(SYS_CHDIR, path);
-	return 0;
+	return syscall(SYS_CHDIR, path);
 }
 
 int sys_sleep(time_t* sec, long* nanosec){
@@ -97,4 +97,7 @@ int sys_fork(pid_t *child){
 
 int sys_execve(const char *path, char *const argv[], char *const envp[]){
 	return -syscall(SYS_EXECVE, path, argv, envp);
+}
+
+#endif
 }
