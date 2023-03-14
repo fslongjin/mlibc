@@ -1,0 +1,22 @@
+[binaries]
+c = 'gcc'
+cpp = 'g++'
+strip = 'x86_64-dragonos-strip'
+ld = 'x86_64-dragonos-ld'
+pkgconfig = 'pkg-config'
+
+[properties]
+cmake_toolchain_file = false
+cmake_defaults = false
+skip_sanity_check = true
+
+[cmake]
+
+[host_machine]
+system = 'lemon'
+cpu_family = 'x86_64'
+cpu = 'x86_64'
+endian = 'little'
+
+[paths]
+prefix = '/system'

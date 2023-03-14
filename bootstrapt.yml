@@ -1,0 +1,41 @@
+packages:
+  - name: mlibc-headers
+    from_source: mlibc
+    pkgs_required:
+      - linux-headers
+    configure:
+      - args:
+        - 'meson'
+        - '--cross=@SOURCE_ROOT@/dragonos-crossfile.txt'
+        - '-Dheaders_only=True'
+        - '-Dlinux_kernel_headers=@BUILD_ROOT@/packages/linux-headers/usr/include'
+        - '--prefix=/system'
+        - '@THIS_SOURCE_DIR@'
+    build:
+      - args: ['ninja']
+      - args: ['ninja', 'install']
+        environ:
+          DESTDIR: '@THIS_COLLECT_DIR@'
+
+  - name: mlibc
+    from_source: mlibc
+    pkgs_required:
+      - mlibc-headers
+      - linux-headers
+    tools_required:
+      - tool: host-llvm
+        stage_dependencies: [compiler]
+      - host-binutils
+    configure:
+      - args:
+        - 'meson'
+        - '--cross=@SOURCE_ROOT@/dragonos-crossfile.txt'
+        - '-Dmlibc_no_headers=true'
+        - '-Dlinux_kernel_headers=@BUILD_ROOT@/packages/linux-headers/usr/include'
+        - '--prefix=/system'
+        - '@THIS_SOURCE_DIR@'
+    build:
+      - args: ['ninja']
+      - args: ['ninja', 'install']
+        environ:
+          DESTDIR: '@THIS_COLLECT_DIR@'
