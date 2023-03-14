@@ -1,9 +1,15 @@
 rtdl_sources += files(
 	'generic/filesystem.cpp',
+	'generic/dragonos.cpp',
+	'generic/entry.cpp',
+	'generic/signals.cpp',
 )
 
 libc_sources += files(
 	'generic/filesystem.cpp',
+	'generic/dragonos.cpp',
+	'generic/entry.cpp',
+	'generic/signals.cpp',
 )
 
 if not no_headers
