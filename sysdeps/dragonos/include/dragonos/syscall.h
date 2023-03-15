@@ -39,6 +39,26 @@ extern "C"{
 #endif
 
 
+
+static long enter_syscall_int(uint64_t syscall_id, uint64_t arg0, uint64_t arg1, uint64_t arg2, uint64_t arg3, uint64_t arg4, uint64_t arg5, uint64_t arg6, uint64_t arg7){
+    long ret;
+    asm volatile("movq %2, %%r8 \n\t"
+                         "movq %3, %%r9 \n\t"
+                         "movq %4, %%r10 \n\t"
+                         "movq %5, %%r11 \n\t"
+                         "movq %6, %%r12 \n\t"
+                         "movq %7, %%r13 \n\t"
+                         "movq %8, %%r14 \n\t"
+                         "movq %9, %%r15 \n\t"
+                         "int $0x80   \n\t"
+                         : "=a"(ret)
+                         : "a"(syscall_id), "m"(arg0), "m"(arg1), "m"(arg2), "m"(arg3), "m"(arg4), "m"(arg5), "m"(arg6),
+                           "m"(arg7)
+                         : "memory", "r8", "r9", "r10", "r11", "r12", "r13", "r14", "r15", "rcx", "rdx");
+
+    return ret;
+}
+
 __attribute__((always_inline))
 static inline long syscalln0(uint64_t call) {
     volatile long ret;
@@ -49,48 +69,42 @@ static inline long syscalln0(uint64_t call) {
 __attribute__((always_inline))
 static long syscalln1(uint64_t call, uint64_t arg0) {
     volatile long ret;
-    asm volatile("int $0x80" : "=a"(ret) : "a"(call), "r8"(arg0) : "memory"); 
+    ret = enter_syscall_int(call, arg0, 0, 0, 0, 0, 0, 0, 0);
     return ret;
 }
 
 __attribute__((always_inline))
 static long syscalln2(uint64_t call, uint64_t arg0, uint64_t arg1) {
     volatile long ret;
-    asm volatile("int $0x80" : "=a"(ret) : "a"(call), "r8"(arg0), "r9"(arg1) : "memory"); 
+    ret = enter_syscall_int(call, arg0, arg1, 0, 0, 0, 0, 0, 0);
     return ret;
 }
 
 __attribute__((always_inline))
 static long syscalln3(uint64_t call, uint64_t arg0, uint64_t arg1, uint64_t arg2) {
     volatile long ret;
-    asm volatile("int $0x80" : "=a"(ret) : "a"(call), "r8"(arg0), "r9"(arg1), "r10"(arg2) : "memory"); 
+    ret = enter_syscall_int(call, arg0, arg1, arg2, 0, 0, 0, 0, 0);
     return ret;
 }
 
 __attribute__((always_inline))
 static long syscalln4(uint64_t call, uint64_t arg0, uint64_t arg1, uint64_t arg2, uint64_t arg3) {
     volatile long ret;
-	register uint64_t arg3r asm("r10") = arg3; // put arg3 in r10
-    asm volatile("int $0x80" : "=a"(ret) : "a"(call), "r8"(arg0), "r9"(arg1), "r10"(arg2), "r11"(arg3r) : "memory"); 
+	ret = enter_syscall_int(call, arg0, arg1, arg2, arg3, 0, 0, 0, 0);
     return ret;
 }
 
 __attribute__((always_inline))
 static long syscalln5(uint64_t call, uint64_t arg0, uint64_t arg1, uint64_t arg2, uint64_t arg3, uint64_t arg4) {
     volatile long ret;
-	register uint64_t arg3r asm("r10") = arg3; // put arg3 in r10
-	register uint64_t arg4r asm("r9") = arg4; // put arg4 in r9
-    asm volatile("int $0x80" : "=a"(ret) : "a"(call), "r8"(arg0), "r9"(arg1), "r10"(arg2), "r11"(arg3r), "r12"(arg4r) : "memory"); 
+    ret = enter_syscall_int(call, arg0, arg1, arg2, arg3, arg4, 0, 0, 0);
     return ret;
 }
 
 __attribute__((always_inline))
 static long syscalln6(uint64_t call, uint64_t arg0, uint64_t arg1, uint64_t arg2, uint64_t arg3, uint64_t arg4, uint64_t arg5) {
     volatile long ret;
-	register uint64_t arg3r asm("r10") = arg3; // put arg3 in r10
-	register uint64_t arg4r asm("r9") = arg4; // put arg4 in r9
-	register uint64_t arg5r asm("r8") = arg5; // put arg5 in r8
-    asm volatile("int $0x80" : "=a"(ret) : "a"(call), "r8"(arg0), "r9"(arg1), "r10"(arg2), "r11"(arg3r), "r12"(arg4r), "r13"(arg4r) : "memory"); 
+	ret = enter_syscall_int(call, arg0, arg1, arg2, arg3, arg4, arg5, 0, 0);
     return ret;
 }
 

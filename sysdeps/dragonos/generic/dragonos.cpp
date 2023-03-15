@@ -3,8 +3,9 @@
 #include <bits/ensure.h>
 #include <abi-bits/pid_t.h>
 #include <mlibc/debug.hpp>
-#include <mlibc/all-sysdeps.hpp>
-#include <mlibc/thread-entry.hpp>
+// #include <mlibc/all-sysdeps.hpp>
+#include <mlibc/internal-sysdeps.hpp>
+// #include <mlibc/thread-entry.hpp>
 #include <errno.h>
 #include <sys/resource.h>
 
@@ -23,6 +24,21 @@ namespace mlibc{
 
 	return ret;
 }*/
+
+int sys_futex_tid(){
+	// return syscall(SYS_GETTID);
+	return -ENOTSUP;
+}
+
+int sys_futex_wait(int *pointer, int expected, const struct timespec *time){
+	return -ENOTSUP;
+	// return syscall(SYS_FUTEX_WAIT, pointer, expected);
+}
+
+int sys_futex_wake(int *pointer) {
+	return -ENOTSUP;
+	// return syscall(SYS_FUTEX_WAKE, pointer);
+}
 
 void sys_libc_panic(){
 	sys_libc_log("libc panic!");

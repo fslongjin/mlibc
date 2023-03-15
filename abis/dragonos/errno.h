@@ -79,7 +79,7 @@
 #define ENOTSUP 61    /* 不被支持 Not supported (may be the same value as [EOPNOTSUPP]). */
 #define ENOTTY 62     /* 不正确的I/O控制操作 Inappropriate I/O control operation. */
 #define ENXIO 63      /* 没有这样的设备或地址 No such device or address. */
-#define EOPNOTSUPP 64 /* 套接字不支持该操作 Operation not supported on socket (may be the same value as [ENOTSUP]). */
+#define EOPNOTSUPP ENOTSUP /* 套接字不支持该操作 Operation not supported on socket (may be the same value as [ENOTSUP]). */
 #define EOVERFLOW 65  /* 数值过大，产生溢出 Value too large to be stored in data type. */
 #define EOWNERDEAD 66 /* 之前的拥有者挂了 Previous owner died. */
 #define EPERM 67      /* 操作不被允许 Operation not permitted. */
@@ -99,3 +99,32 @@
 
 #define EWOULDBLOCK 80 /* 操作将被禁止 Operation would block (may be the same value as [EAGAIN]). */
 #define EXDEV 81       /* 跨设备连接 Cross-device link. */
+#define ENOKEY 82
+#define ESHUTDOWN 83
+#define ENOMEDIUM 84
+#define EMEDIUMTYPE 85
+#define ENOTBLK 86
+#define ENONET 87
+#define EPFNOSUPPORT 88
+#define ESOCKTNOSUPPORT 89 
+#define ESTRPIPE 90
+#define EREMOTEIO 91
+#define ERFKILL 92
+#define EBADR 93
+#define EUNATCH 94
+#define EREMOTE 95
+#define EKEYREJECTED 96
+#define EUCLEAN 97
+#define EBADSLT 98
+#define ENOANO 99
+#define ENOCSI 100
+#define ENOPKG 101
+#define EKEYREVOKED 102
+#define EXFULL 103
+#define ELNRNG 104
+#define ENOTUNIQ 105
+#define ERESTART 106
+#define EUSERS 107
+#define EBADFD 108
+#define EHOSTDOWN 109
+#define ETOOMANYREFS 110
