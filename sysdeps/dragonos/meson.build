@@ -14,7 +14,7 @@ libc_sources += files(
 
 if not no_headers
 	install_headers(
-		'include/abi-bits/auxv.h',
+		# 'include/abi-bits/auxv.h',
 		'include/abi-bits/seek-whence.h',
 		'include/abi-bits/vm-flags.h',
 		'include/abi-bits/errno.h',
@@ -45,15 +45,15 @@ if not no_headers
 		'include/abi-bits/packet.h',
 		'include/abi-bits/inotify.h',
 		'include/abi-bits/clockid_t.h',
-		'include/abi-bits/shm.h',
-		'include/abi-bits/mqueue.h',
-		'include/abi-bits/suseconds_t.h',
-		'include/abi-bits/fsfilcnt_t.h',
-		'include/abi-bits/fsblkcnt_t.h',
-		'include/abi-bits/socklen_t.h',
-		'include/abi-bits/statfs.h',
-		'include/abi-bits/statvfs.h',
-		'include/abi-bits/ioctls.h',
+		# 'include/abi-bits/shm.h',
+		# 'include/abi-bits/mqueue.h',
+		# 'include/abi-bits/suseconds_t.h',
+		# 'include/abi-bits/fsfilcnt_t.h',
+		# 'include/abi-bits/fsblkcnt_t.h',
+		# 'include/abi-bits/socklen_t.h',
+		# 'include/abi-bits/statfs.h',
+		# 'include/abi-bits/statvfs.h',
+		# 'include/abi-bits/ioctls.h',
 		subdir: 'abi-bits'
 	)
 	install_headers(

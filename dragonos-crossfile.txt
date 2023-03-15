@@ -1,0 +1,22 @@
+[binaries]
+c = 'x86_64-elf-gcc'
+cpp = 'x86_64-elf-g++'
+strip = 'x86_64-elf-strip'
+ld = 'x86_64-elf-ld'
+pkgconfig = 'pkg-config'
+
+[properties]
+cmake_toolchain_file = false
+cmake_defaults = false
+skip_sanity_check = true
+
+[cmake]
+
+[host_machine]
+system = 'dragonos'
+cpu_family = 'x86_64'
+cpu = 'x86_64'
+endian = 'little'
+
+[paths]
+prefix = '/system'
