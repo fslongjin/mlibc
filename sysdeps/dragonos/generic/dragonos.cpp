@@ -1,29 +1,34 @@
 #include <dragonos/syscall.h>
 #include <stddef.h>
-#include <bits/ensure.h>
+// #include <bits/ensure.h>
 #include <abi-bits/pid_t.h>
 #include <mlibc/debug.hpp>
 // #include <mlibc/all-sysdeps.hpp>
 #include <mlibc/internal-sysdeps.hpp>
 // #include <mlibc/thread-entry.hpp>
 #include <errno.h>
-#include <sys/resource.h>
+// #include <sys/resource.h>
 
 //#include <mlibc/allocator.hpp>
 namespace mlibc{
-/*int sys_vm_map(void *hint, size_t size, int prot, int flags, int fd, off_t offset, void **window) {
-	__ensure(flags & MAP_ANONYMOUS);
 
-	return syscall(SYS_MMAP, (uintptr_t)window, (size + 0xFFF) & ~static_cast<size_t>(0xFFF), (uintptr_t)hint, flags);
-}*/
+int sys_tcb_set(void *pointer){
+	return -ENOTSUP;
+}
+int sys_anon_allocate(size_t size, void **pointer){
+	return -ENOTSUP;
+}
 
-/*int sys_vm_unmap(void* address, size_t size) {
-	__ensure(!(size & 0xFFF));
+int sys_anon_free(void *pointer, size_t size){
+	return -ENOTSUP;
+}
 
-	long ret = syscall(SYS_MUNMAP, (uintptr_t)address, (size + 0xFFF) & ~static_cast<size_t>(0xFFF));
-
-	return ret;
-}*/
+int sys_vm_map(void *hint, size_t size, int prot, int flags, int fd, off_t offset, void **window){
+	return -ENOTSUP;
+}
+int sys_vm_unmap(void *pointer, size_t size){
+	return -ENOTSUP;
+}
 
 int sys_futex_tid(){
 	// return syscall(SYS_GETTID);
@@ -114,6 +119,11 @@ int sys_fork(pid_t *child){
 int sys_execve(const char *path, char *const argv[], char *const envp[]){
 	return -syscall(SYS_EXECVE, path, argv, envp);
 }
+
+int sys_stat(fsfd_target fsfdt, int fd, const char *path, int flags,
+		struct stat *statbuf){
+			return -ENOTSUP;
+		}
 
 #endif
 }
